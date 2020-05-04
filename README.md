@@ -7,13 +7,13 @@
 - Language: Python 3.8.2
 
 ## Requirements
-   pip install numpy
+    pip install numpy
    
-   pip install matplotlib
+    pip install matplotlib
    
-   pip install opencv-python
+    pip install opencv-python
    
 ### References:
-   https://blog.floydhub.com/colorizing-b-w-photos-with-neural-networks/
+    https://blog.floydhub.com/colorizing-b-w-photos-with-neural-networks/
    
-   https://towardsdatascience.com/colorizing-old-b-w-photos-and-videos-with-the-help-of-ai-76ba086f15ec
+    https://towardsdatascience.com/colorizing-old-b-w-photos-and-videos-with-the-help-of-ai-76ba086f15ec
