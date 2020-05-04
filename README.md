@@ -13,4 +13,5 @@
    
 ### Reference: 
    https://blog.floydhub.com/colorizing-b-w-photos-with-neural-networks/
+   
    https://towardsdatascience.com/colorizing-old-b-w-photos-and-videos-with-the-help-of-ai-76ba086f15ec
