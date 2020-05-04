@@ -6,7 +6,7 @@
 
 - Language: Python 3.8.2
 
-- Requirements
+## Requirements ##
     pip install numpy
     pip install matplotlib
     pip install opencv-python
