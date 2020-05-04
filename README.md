@@ -6,7 +6,7 @@
 
 - We will create a model as per the main reference. We will extend it so that we can train with more datasets.
 
-- Language: Python 3.8.2
+- Language: Python 3.6
 
 ## Requirements
     pip install numpy
