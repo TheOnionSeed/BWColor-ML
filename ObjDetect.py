@@ -14,14 +14,13 @@ import os
 model = "./model/"
 image =  "./input_images/"
 
-
 execution_path = os.getcwd()
 
 detector = ObjectDetection()
 detector.setModelTypeAsRetinaNet()
 detector.setModelPath( os.path.join(execution_path , model+"resnet50_coco_best_v2.0.1.h5"))
 detector.loadModel()
-detections,extracted_images  = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , image+"tesla_1883.jpg"), output_image_path=os.path.join(execution_path , image+"imagenew.jpg"), extract_detected_objects=True)
+detections,extracted_images  = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , image+"soldiers_1941.jpg"), output_image_path=os.path.join(execution_path , image+"imagenew.jpg"), extract_detected_objects=True)
 
 for eachObject in detections:
     print(eachObject["name"] , " : " , eachObject["percentage_probability"] )
