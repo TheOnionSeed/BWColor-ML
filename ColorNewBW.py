@@ -37,9 +37,9 @@ Xtrain = 1.0/255*X
 
 
 #Load weights
-inception = InceptionResNetV2(weights=None, include_top=True)
-inception.load_weights('model/inception_resnet_v2_weights_tf_dim_ordering_tf_kernels.h5')
+inception = InceptionResNetV2(weights='imagenet', include_top=True)
 inception.graph = tf.get_default_graph()
+
 
 embed_input = Input(shape=(1000,))
 
@@ -72,7 +72,6 @@ decoder_output = UpSampling2D((2, 2))(decoder_output)
 
 model = Model(inputs=[encoder_input, embed_input], outputs=decoder_output)
 
-#Create embedding
 def create_inception_embedding(grayscaled_rgb):
     grayscaled_rgb_resized = []
     for i in grayscaled_rgb:
@@ -86,9 +85,9 @@ def create_inception_embedding(grayscaled_rgb):
 
 # Image transformer
 datagen = ImageDataGenerator(
-        shear_range=0.4,
-        zoom_range=0.4,
-        rotation_range=40,
+        shear_range=0.2,
+        zoom_range=0.2,
+        rotation_range=20,
         horizontal_flip=True)
 
 #Generate training data
@@ -104,26 +103,33 @@ def image_a_b_gen(batch_size):
         Y_batch = lab_batch[:,:,:,1:] / 128
         yield ([X_batch, create_inception_embedding(grayscaled_rgb)], Y_batch)
 
-#Train model      
-tensorboard = TensorBoard(log_dir="output/")
-model.compile(optimizer='adam', loss='mse')
-model.fit_generator(image_a_b_gen(batch_size), callbacks=[tensorboard], epochs=20, steps_per_epoch=1)
 
-#Make a prediction on the unseen images
+#Train model      
+model.compile(optimizer='rmsprop', loss='mse')
+model.fit_generator(image_a_b_gen(batch_size), epochs=1000, steps_per_epoch=1)
+
 color_me = []
 for filename in os.listdir('Test/'):
     color_me.append(img_to_array(load_img('Test/'+filename)))
 color_me = np.array(color_me, dtype=float)
-color_me = 1.0/255*color_me
-color_me = gray2rgb(rgb2gray(color_me))
-color_me_embed = create_inception_embedding(color_me)
-color_me = rgb2lab(color_me)[:,:,:,0]
+gray_me = gray2rgb(rgb2gray(1.0/255*color_me))
+color_me_embed = create_inception_embedding(gray_me)
+color_me = rgb2lab(1.0/255*color_me)[:,:,:,0]
 color_me = color_me.reshape(color_me.shape+(1,))
 
 
 # Test model
 output = model.predict([color_me, color_me_embed])
 output = output * 128
+
+# Output colorizations
+for i in range(len(output)):
+    cur = np.zeros((256, 256, 3))
+    cur[:,:,0] = color_me[i][:,:,0]
+    cur[:,:,1:] = output[i]
+    imsave("result/img_"+str(i)+"_c.png", lab2rgb(cur))
+    imsave("result/img_"+str(i)+".png", img_as_ubyte(lab2rgb(cur)))
+'''
 import imageio
 # Output colorizations
 for i in range(len(output)):
@@ -142,3 +148,4 @@ for i in range(len(output)):
     # and then
     imageio.imwrite("result/img_"+str(i)+".png", img_uint8)
     
+'''
