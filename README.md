@@ -18,3 +18,6 @@
     MAIN: https://towardsdatascience.com/colorizing-old-b-w-photos-and-videos-with-the-help-of-ai-76ba086f15ec
 
     https://blog.floydhub.com/colorizing-b-w-photos-with-neural-networks/
+
+    https://lukemelas.github.io/image-colorization.html
+    
