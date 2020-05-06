@@ -21,3 +21,4 @@
 
     https://lukemelas.github.io/image-colorization.html
     
+    https://github.com/emilwallner/Coloring-greyscale-images
