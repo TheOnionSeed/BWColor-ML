@@ -40,7 +40,6 @@ Xtrain = 1.0/255*X
 inception = InceptionResNetV2(weights='imagenet', include_top=True)
 inception.graph = tf.get_default_graph()
 
-
 embed_input = Input(shape=(1000,))
 
 #Encoder
@@ -108,15 +107,16 @@ def image_a_b_gen(batch_size):
 model.compile(optimizer='rmsprop', loss='mse')
 model.fit_generator(image_a_b_gen(batch_size), epochs=1000, steps_per_epoch=1)
 
+#Make a prediction on the unseen images
 color_me = []
 for filename in os.listdir('Test/'):
     color_me.append(img_to_array(load_img('Test/'+filename)))
 color_me = np.array(color_me, dtype=float)
-gray_me = gray2rgb(rgb2gray(1.0/255*color_me))
-color_me_embed = create_inception_embedding(gray_me)
-color_me = rgb2lab(1.0/255*color_me)[:,:,:,0]
+color_me = 1.0/255*color_me
+color_me = gray2rgb(rgb2gray(color_me))
+color_me_embed = create_inception_embedding(color_me)
+color_me = rgb2lab(color_me)[:,:,:,0]
 color_me = color_me.reshape(color_me.shape+(1,))
-
 
 # Test model
 output = model.predict([color_me, color_me_embed])
