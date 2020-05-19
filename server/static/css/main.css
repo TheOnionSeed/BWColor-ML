@@ -1,9 +1,41 @@
-.darkbg{
-   background: #999;
+.NunitoFont{
+   font-family: Nunito;
 }
-.darkerbg{
-   background: #666;
+.UploadBG{
+   background:  #99ffbb;
 }
+.ConvertBG{
+   background: #ffffb3;
+}
+
+.rcornersG {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+}
+
+.rcornersY {
+  border-radius: 25px;
+  border: 2px solid #b3b300;
+  padding: 20px;
+}
+
 .darkestbg{
    background: #333;
+}
+
+.center {
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.hTopMargin{
+   margin-top: 3em;
+}
+@font-face {
+  font-family: Nunito;
+  src: url(Nunito-Regular.ttf);
 }
