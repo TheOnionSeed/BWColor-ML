@@ -6,7 +6,11 @@ $( document ).ready(function() {
     var dropZone = document.getElementById('drop-zone');
 
     var startUpload = function(files) {
-        console.log(files)
+        if(files.length >1){
+           alert("Please upload 1 file only!");
+        }else{
+           
+        }
     }
 
     dropZone.ondrop = function(e) {
