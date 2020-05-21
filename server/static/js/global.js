@@ -9,7 +9,25 @@ $( document ).ready(function() {
         if(files.length >1){
            alert("Please upload 1 file only!");
         }else{
+           var fd= new FormData();
+           fd.append('imagefile',files[0]);
            
+           $.ajax({
+            url:'uploader',
+            type:'post',
+            data:fd,
+            contentType:false,
+            processData:false,
+            success:function(response){
+               if(response!==0){
+                  console.log("success" + response);
+               }
+               else{
+                  console.log("fail" + response);
+               }
+            }
+            
+           });
         }
     }
 
