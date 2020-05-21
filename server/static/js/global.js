@@ -20,7 +20,8 @@ $( document ).ready(function() {
             processData:false,
             success:function(response){
                if(response!==0){
-                  console.log("success" + response);
+                  //console.log("success" + response["Image"]);
+                  $('#imgConv').html('<img src="data:image/png;base64,' + response["Image"]  + '" style="height: 50%; width:50%; margin-top:2em;" />');
                }
                else{
                   console.log("fail" + response);
