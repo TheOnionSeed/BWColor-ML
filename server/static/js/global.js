@@ -11,7 +11,8 @@ $( document ).ready(function() {
         }else{
            var fd= new FormData();
            fd.append('imagefile',files[0]);
-           
+           $('#loader').removeClass('hide');
+           $('#imgConv').html('');
            $.ajax({
             url:'uploader',
             type:'post',
@@ -19,12 +20,14 @@ $( document ).ready(function() {
             contentType:false,
             processData:false,
             success:function(response){
+               $('#loader').addClass('hide');
                if(response!==0){
                   //console.log("success" + response["Image"]);
                   $('#imgConv').html('<img src="data:image/png;base64,' + response["Image"]  + '" style="height: 50%; width:50%; margin-top:2em;" />');
                }
                else{
                   console.log("fail" + response);
+                  alert('Improper File Upload!');
                }
             }
             
